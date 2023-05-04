@@ -4,11 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d4bec30-1e3b-45c3-922b-37d54c06be91" name="Changes" comment="" />
+    <list default="true" id="0d4bec30-1e3b-45c3-922b-37d54c06be91" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lecture_codes_notes/.idea/lecturecodes.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lecture_codes_notes/lec15_mutability/codes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lecture_codes_notes/lec15_mutability/withdraw.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lecture_codes_notes/lec16/lec16_iterator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lecture_codes_notes/lec16/palindrom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/.idea/lecturecodes.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/iDB 2023-04-30 at 18.28.51.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec10Recur/cascade.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec10Recur/counting_part2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec10Recur/counting_partition.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec10Recur/fib.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec10Recur/inverse_cascade.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec12Containers-dictionary/indexing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec13/gcd.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec13/rational_func.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec13/rational_list.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec14/count_paths.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec14/summing_paths.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec14/tree.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec5-environments/curry.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec5-environments/twice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec7/make_sqrt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec7/real_sqrt.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec8/decorator1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec8/remove.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec9/combination_sum.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec9/fact.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec9/luhn_sum.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lec9/sum_digits.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/adder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/area.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/area_generalized.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/fibonacci.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/primFac.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../notes+codes/lecture4-Hof/sums.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -45,6 +90,7 @@
       <workItem from="1679921244883" duration="14633000" />
       <workItem from="1681869399714" duration="1661000" />
       <workItem from="1682648890531" duration="2397000" />
+      <workItem from="1682951786383" duration="598000" />
     </task>
     <servers />
   </component>

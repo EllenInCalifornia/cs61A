@@ -1,0 +1,6 @@
+iter(iterable) vs iter(iterator)
+Calling iter on an iterable multiple times returns a new
+iterator each time with distinct states (otherwise, you'd never be able
+ to iterate through a iterable more than once). You can also call iter
+ on the iterator itself, which will just return the same iterator without
+  changing its state.
