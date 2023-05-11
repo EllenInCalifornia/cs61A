@@ -71,7 +71,22 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    "*** YOUR CODE HERE ***"
+    def repeat_link(val, count):
+        pre, cur = Link.empty, Link.empty
+        while count > 0:
+            pre = Link(val)
+            pre.rest = cur
+            cur = pre
+            count -= 1
+        return pre
+    pre = Link(0)
+    cur = pre
+    for a,b in zip(vals, counts):
+        cur.rest = repeat_link(a, b)
+        cur = cur.rest
+    return pre.rest
+
+
 
 
 def add_d_leaves(t, v):
