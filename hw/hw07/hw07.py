@@ -83,7 +83,10 @@ def two_list(vals, counts):
     cur = pre
     for a,b in zip(vals, counts):
         cur.rest = repeat_link(a, b)
-        cur = cur.rest
+        while cur.rest:
+            cur = cur.rest
+
+
     return pre.rest
 
 
