@@ -44,13 +44,13 @@ def deep_map_mut(func, lnk):
     >>> print(link1)
     <9 <16> 25 36>
     """
-    if not lnk:
+    if lnk is Link.empty:
         return
-    if isinstance(lnk.first, Link):
+    elif isinstance(lnk.first, Link):
         deep_map_mut(func, lnk.first)
     else:
         lnk.first = func(lnk.first)
-        lnk.rest = deep_map_mut(func, lnk.rest)
+        deep_map_mut(func, lnk.rest)
 
 
 def two_list(vals, counts):
