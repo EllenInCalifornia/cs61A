@@ -72,13 +72,10 @@ def two_list(vals, counts):
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
     def repeat_link(val, count):
-        pre, cur = Link.empty, Link.empty
-        while count > 0:
-            pre = Link(val)
-            pre.rest = cur
-            cur = pre
-            count -= 1
-        return pre
+        if count == 0:
+            return Link.empty
+        return Link(val, repeat_link(val, count-1))
+
     pre = Link(0)
     cur = pre
     for a,b in zip(vals, counts):
