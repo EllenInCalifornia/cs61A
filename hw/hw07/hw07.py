@@ -16,16 +16,15 @@ def store_digits(n):
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     >>> link1 = Link(3, Link(Link(4), Link(5, Link(6))))
     """
-    if n // 10 == 0:
-        return Link(n)
-    last_digit = n % 10
-    last_node = Link(last_digit)
-    remaining = store_digits(n//10)
-    ptr = remaining
-    while ptr.rest:
-        ptr = ptr.rest
-    ptr.rest = last_node
-    return remaining
+    # iterative way
+    pre = Link.empty
+    cur = Link.empty
+    while n != 0:
+         pre = Link(n%10)
+         pre.rest = cur
+         cur = pre
+         n //= 10
+    return cur
 
 
 def deep_map_mut(func, lnk):
