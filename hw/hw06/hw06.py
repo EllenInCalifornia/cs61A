@@ -1,3 +1,5 @@
+# VirFib 很有意思，用instance attribute 来store value
+
 class Mint:
     """A mint creates coins by stamping on years.
 
@@ -33,7 +35,8 @@ class Mint:
         self.update()
 
     def create(self, coin):
-        "*** YOUR CODE HERE ***"
+        new_coin = coin(self.year)
+        return new_coin
 
     def update(self):
         self.year = Mint.present_year
@@ -46,7 +49,11 @@ class Coin:
         self.year = year
 
     def worth(self):
-        "*** YOUR CODE HERE ***"
+        age = Mint.present_year - self.year
+        value = self.cents
+        if age > 50:
+            value += (age - 50)
+        return value
 
 
 class Nickel(Coin):
@@ -94,7 +101,38 @@ class VendingMachine:
     >>> w.vend()
     'Here is your soda.'
     """
-    "*** YOUR CODE HERE ***"
+    def __init__(self, product, price):
+        self.stock = 0
+        self.product = product
+        self.balance = 0
+        self.price = price
+    def restock(self, n):
+        self.stock += n
+        return 'Current ' + self.product + ' stock: ' + str(self.stock)
+    def vend(self):
+        if self.stock == 0:
+            return 'Nothing left to vend. Please restock.'
+        elif self.balance < self.price:
+            return 'Please add $' + str(self.price - self.balance) + ' more funds.'
+        elif self.balance > self.price:
+            change = self.balance - self.price
+            self.balance = 0
+            self.stock -= 1
+            return 'Here is your candy and $' + str(change) +' change.'
+        else:
+            self.balance = 0
+            self.stock -= 1
+            return 'Here is your ' + self.product +'.'
+    def add_funds(self, n):
+        if self.stock == 0:
+            return 'Nothing left to vend. Please restock. Here is your $' + str(n) +'.'
+        self.balance += n
+        return 'Current balance: ' + '$' + str(self.balance)
+
+
+
+
+
 
 
 def make_test_random():
@@ -154,10 +192,26 @@ class Player:
         self.popularity = 100
 
     def debate(self, other):
-        "*** YOUR CODE HERE ***"
+        p1 = self.popularity
+        p2 = other.popularity
+        win_prob = max(0.1, p1 / (p1 + p2))
+        r = random()
+        if r < win_prob:
+            self.popularity += 50
+        else:
+            self.popularity -= 50
+            if self.popularity < 0:
+                self.popularity = 0
 
     def speech(self, other):
-        "*** YOUR CODE HERE ***"
+        p1 = self.popularity
+        p2 = other.popularity
+        self.votes += p1 // 10
+        self.popularity += p1 // 10
+        other.popularity -= p2 // 10
+
+
+
 
     def choose(self, other):
         return self.speech
@@ -181,14 +235,22 @@ class Game:
 
     def play(self):
         while not self.game_over():
-            "*** YOUR CODE HERE ***"
+            if self.turn % 2 == 0:
+                self.p1.choose(self.p2)(self.p2)
+            else:
+                self.p2.choose(self.p1)(self.p1)
+            self.turn += 1
         return self.winner()
 
     def game_over(self):
         return max(self.p1.votes, self.p2.votes) >= 50 or self.turn >= 10
 
     def winner(self):
-        "*** YOUR CODE HERE ***"
+        if self.p1.votes > self.p2.votes:
+            return self.p1
+        elif self.p1.votes < self.p2.votes:
+            return self.p2
+        return None
 
 
 # Phase 3: New Players
@@ -204,7 +266,10 @@ class AggressivePlayer(Player):
     """
 
     def choose(self, other):
-        "*** YOUR CODE HERE ***"
+        if self.popularity <= other.popularity:
+            return self.debate
+        else: return self.speech
+
 
 
 class CautiousPlayer(Player):
@@ -221,7 +286,10 @@ class CautiousPlayer(Player):
     """
 
     def choose(self, other):
-        "*** YOUR CODE HERE ***"
+        if self.popularity == 0:
+            return self.debate
+        else:
+            return self.speech
 
 
 class VirFib():
@@ -250,7 +318,16 @@ class VirFib():
         self.value = value
 
     def next(self):
-        "*** YOUR CODE HERE ***"
+        if self.value == 0:
+            res = VirFib(1)
+        else:
+            res = VirFib(self.value + self.previous)
+        res.previous = self.value
+        return res
+# storing the current value makes the
+# solution look very similar to the iterative version of the virfib problem.
+
+
 
     def __repr__(self):
         return "VirFib object, value " + str(self.value)

@@ -139,6 +139,8 @@ class Round:
         self.next_player = (who + 1) % Round.players
         if card >= self.highest:
             # 注意加的这个中间的attribute
+            # the instance didn't have this attribute control,
+            # so this assignment will add one
             self.control = who
             self.highest = card
         if self.is_complete():
