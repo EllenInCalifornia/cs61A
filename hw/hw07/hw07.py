@@ -71,20 +71,22 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    def repeat_link(val, count):
+    def helper(count, index):
         if count == 0:
-            return Link.empty
-        return Link(val, repeat_link(val, count-1))
+            # this the last val in the list
+            if index + 1 == len(vals):
+                return Link.empty
+            else: # return lnk created by next val
+                return helper(counts[index+1], index+1)
+        return Link(vals[index], helper(count-1, index))
+    return helper(counts[0], 0)
+            
 
-    pre = Link(0)
-    cur = pre
-    for a,b in zip(vals, counts):
-        cur.rest = repeat_link(a, b)
-        while cur.rest:
-            cur = cur.rest
 
 
-    return pre.rest
+
+
+
 
 
 
