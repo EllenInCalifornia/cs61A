@@ -21,7 +21,10 @@ def store_digits(n):
     last_digit = n % 10
     last_node = Link(last_digit)
     remaining = store_digits(n//10)
-    remaining.rest = last_node
+    ptr = remaining
+    while ptr.rest:
+        ptr = ptr.rest
+    ptr.rest = last_node
     return remaining
 
 
