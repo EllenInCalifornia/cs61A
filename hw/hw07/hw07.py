@@ -71,16 +71,17 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    def helper(count, index):
-        if count == 0:
-            # this the last val in the list
-            if index + 1 == len(vals):
-                return Link.empty
-            else: # return lnk created by next val
-                return helper(counts[index+1], index+1)
-        return Link(vals[index], helper(count-1, index))
-    return helper(counts[0], 0)
-            
+    # iterative way
+    pre = Link(1)
+    cur = pre
+    for i in range(len(vals)):
+        while counts[i] > 0:
+            cur.rest = Link(vals[i])
+            cur = cur.rest
+            counts[i] -= 1 
+    return pre.rest
+
+
 
 
 
