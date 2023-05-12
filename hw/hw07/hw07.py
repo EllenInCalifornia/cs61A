@@ -78,7 +78,7 @@ def two_list(vals, counts):
         while counts[i] > 0:
             cur.rest = Link(vals[i])
             cur = cur.rest
-            counts[i] -= 1 
+            counts[i] -= 1
     return pre.rest
 
 
@@ -150,7 +150,19 @@ def add_d_leaves(t, v):
           10
         10
     """
-    "*** YOUR CODE HERE ***"
+
+    def helper(t, d):
+
+        #t.branches + [Tree(v)] * d
+        for b in t.branches:
+            helper(b, d+1)
+        t.branches.extend([Tree(v)] * d)
+        #t.branches.extend([Tree(v) for _ in range(d)])
+    d = 0
+    helper(t, d)
+
+
+
 
 
 class Link:
