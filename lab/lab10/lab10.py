@@ -7,7 +7,9 @@ def insert_into_all(item, nested_list):
     >>> insert_into_all(0, nl)
     [[0], [0, 1, 2], [0, 3]]
     """
-    "*** YOUR CODE HERE ***"
+    # list comprehension returns a new list
+    # use concatenation to create new list for nested list
+    return [[item] + l  for l in nested_list]
 
 
 def subseqs(s):
@@ -20,11 +22,14 @@ def subseqs(s):
     >>> subseqs([])
     [[]]
     """
-    if ________________:
-        ________________
+    if not s:
+        return [[]]
+
     else:
-        ________________
-        ________________
+        sub = subseqs(s[1:])
+        return insert_into_all(s[0], sub) + sub
+
+
 
 
 def non_decrease_subseqs(s):
