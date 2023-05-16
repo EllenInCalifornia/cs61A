@@ -104,6 +104,24 @@ def partition_gen(n):
             yield ________________________________________
     yield from yield_helper(n, n)
 
+def partition(n):
+    res = []
+    def helper(j, k, cur):
+        if j == 0:
+            res.append(cur.copy())
+            return
+
+        if k == 0 or j < 0:
+            return
+        # with_k = [[k] + p for p in helper(j-k, k)]
+        cur.append(k)
+        helper(j-k, k, cur)
+        cur.pop()
+        helper(j, k-1, cur)
+    helper(n, n, [])
+
+    return res
+
 
 def trade(first, second):
     """Exchange the smallest prefixes of first and second that have equal sum.
