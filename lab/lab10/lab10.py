@@ -23,11 +23,11 @@ def subseqs(s):
     [[]]
     """
     if not s:
-        return [[]]
+        return []
+    sub1 = subseqs(s[1:])
+    sub2 = [s[0] + sub for sub in sub1]
+    return [sub1] + [sub2]
 
-    else:
-        sub = subseqs(s[1:])
-        return insert_into_all(s[0], sub) + sub
 
 
 
@@ -78,7 +78,6 @@ def num_trees(n):
     429
 
     """
-    "*** YOUR CODE HERE ***"
 
 
 def partition_gen(n):
