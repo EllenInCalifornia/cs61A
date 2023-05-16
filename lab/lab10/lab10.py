@@ -97,7 +97,7 @@ def partition_gen(n):
     """
     def yield_helper(j, k):
         if j == 0:
-            yield [[]]
+            yield []
 
         elif j > 0 and k != 0:
             for small_part in yield_helper(j-k, k):
@@ -123,6 +123,24 @@ def partition(n):
 
     return res
 
+# 错解
+def partition2(n):
+    def helper(j, k):
+        if j == 0:
+            return [[]]
+        elif j > 0 and k > 0:
+            if helper(j-k, k):
+                with_k = [[k] + p for p in helper(j-k, k)]
+            without_k = helper(j, k-1)
+        if helper(j-k, k) and helper(j, k-1):
+            return with_k + without_k
+        elif helper(j-k, k):
+            return with_k
+        elif helper(j, k-1):
+            return without_k
+        else:
+            return
+    return helper(n, n)
 
 def trade(first, second):
     """Exchange the smallest prefixes of first and second that have equal sum.
@@ -161,9 +179,9 @@ def trade(first, second):
     """
     m, n = 1, 1
 
-    equal_prefix = lambda: ______________________
-    while _______________________________:
-        if __________________:
+    equal_prefix = lambda: sum(first[:m]) == sum(second[:n])
+    while m <= len(first) and n <= len(second) and not equal_prefix:
+        if sum(second[:n]) > sum[first[:m]]:
             m += 1
         else:
             n += 1
