@@ -23,10 +23,10 @@ def subseqs(s):
     [[]]
     """
     if not s:
-        return []
+        return [[]]
     sub1 = subseqs(s[1:])
-    sub2 = [s[0] + sub for sub in sub1]
-    return [sub1] + [sub2]
+    sub2 = [[s[0]] + sub for sub in sub1]
+    return sub1 + sub2
 
 
 
@@ -48,14 +48,16 @@ def non_decrease_subseqs(s):
     """
     def subseq_helper(s, prev):
         if not s:
-            return ____________________
+            return [[]]
         elif s[0] < prev:
-            return ____________________
+            return subseq_helper(s[1:], prev)
         else:
-            a = ______________________
-            b = ______________________
-            return insert_into_all(________, ______________) + ________________
-    return subseq_helper(____, ____)
+            # include s[0]
+            a = subseq_helper(s[1:], s[0])
+            # not include s[0]
+            b = subseq_helper(s[1:], prev)
+            return insert_into_all(s[0], a) + b
+    return subseq_helper(s, 0)
 
 
 def num_trees(n):
@@ -78,6 +80,9 @@ def num_trees(n):
     429
 
     """
+    if n == 1:
+        return 1
+    return sum(num_trees(k) * num_trees(n-k) for k in range(1, n))
 
 
 def partition_gen(n):
