@@ -97,11 +97,12 @@ def partition_gen(n):
     """
     def yield_helper(j, k):
         if j == 0:
-            ____________________________________________
-        elif ____________________________________________:
-            for small_part in ________________________________:
-                yield ____________________________________________
-            yield ________________________________________
+            yield [[]]
+
+        elif j > 0 and k != 0:
+            for small_part in yield_helper(j-k, k):
+                yield [k] + small_part
+            yield from yield_helper(j, k-1)
     yield from yield_helper(n, n)
 
 def partition(n):
