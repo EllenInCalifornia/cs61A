@@ -141,6 +141,20 @@ def partition2(n):
         else:
             return
     return helper(n, n)
+# 正解
+def count_partitions(n, m):
+    """Counts the number of partitions of a positive integer n,
+    using parts up to size m."""
+    if n == 0:
+        return 1
+    elif n < 0:
+        return 0
+    elif m == 0:
+        return 0
+    else:
+        with_m = count_partitions(n-m, m)
+        without_m = count_partitions(n, m-1)
+        return with_m + without_m
 
 def trade(first, second):
     """Exchange the smallest prefixes of first and second that have equal sum.
@@ -180,8 +194,8 @@ def trade(first, second):
     m, n = 1, 1
 
     equal_prefix = lambda: sum(first[:m]) == sum(second[:n])
-    while m <= len(first) and n <= len(second) and not equal_prefix:
-        if sum(second[:n]) > sum[first[:m]]:
+    while m <= len(first) and n <= len(second) and not equal_prefix():
+        if sum(second[:n]) > sum(first[:m]):
             m += 1
         else:
             n += 1
@@ -219,13 +233,43 @@ def shuffle(cards):
     ['AH', 'AD', 'AS', 'AC', '2H', '2D', '2S', '2C', '3H', '3D', '3S', '3C']
     """
     assert len(cards) % 2 == 0, 'len(cards) must be even'
-    half = _______________
+    half = len(cards) // 2
     shuffled = []
-    for i in _____________:
-        _________________
-        _________________
+    for i in range(half):
+        shuffled.append(cards[i])
+        shuffled.append(cards[i + half])
+
     return shuffled
 
+
+def insert_iter(link, value, index):
+    """Insert a value into a Link at the given index.
+
+    >>> link = Link(1, Link(2, Link(3)))
+    >>> print(link)
+    <1 2 3>
+    >>> other_link = link
+    >>> insert(link, 9001, 0)
+    >>> print(link)
+    <9001 1 2 3>
+    >>> link is other_link # Make sure you are using mutation! Don't create a new linked list.
+    True
+    >>> insert(link, 100, 2)
+    >>> print(link)
+    <9001 1 100 2 3>
+    >>> insert(link, 4, 5)
+    Traceback (most recent call last):
+        ...
+    IndexError: Out of bounds!
+    """
+    while index > 0 and link.rest:
+        index -= 1
+        link = link.rest
+    if index > 0:
+        raise IndexError('Out of bounds!')
+    else:
+        link.rest = Link(link.first, link.rest)
+        link.first = value
 
 def insert(link, value, index):
     """Insert a value into a Link at the given index.
@@ -247,7 +291,15 @@ def insert(link, value, index):
         ...
     IndexError: Out of bounds!
     """
-    "*** YOUR CODE HERE ***"
+    if not link:
+        raise IndexError('Out of bounds!')
+    if index == 0:
+        link.rest = Link(link.first, link.rest)
+        link.first = value
+    else:
+        insert(link.rest, value, index-1)
+
+
 
 
 def deep_len(lnk):
@@ -264,12 +316,13 @@ def deep_len(lnk):
     >>> deep_len(levels)
     5
     """
-    if ______________:
+    if lnk is Link.empty:
         return 0
-    elif ______________:
+    elif type(lnk) != Link:
+    # elif not isinstance(lnk, Link):
         return 1
     else:
-        return _________________________
+        return deep_len(lnk.first) + deep_len(lnk.rest)
 
 
 def make_to_string(front, mid, back, empty_repr):
@@ -288,10 +341,10 @@ def make_to_string(front, mid, back, empty_repr):
     '()'
     """
     def printer(lnk):
-        if ______________:
-            return _________________________
+        if not lnk:
+            return empty_repr
         else:
-            return _________________________
+            return front + str(lnk.first) + mid + printer(lnk.rest) + back
     return printer
 
 
@@ -308,7 +361,18 @@ def reverse_other(t):
     >>> t
     Tree(1, [Tree(8, [Tree(3, [Tree(5), Tree(4)]), Tree(6, [Tree(7)])]), Tree(2)])
     """
-    "*** YOUR CODE HERE ***"
+    def reverse(t, flag):
+        if t.is_leaf():
+            return
+        if flag:
+            l = len(t.branches)
+            new_labs = [b.label for b in t.branches][::-1]
+            for i in range(l):
+                b = t.branches[i]
+                b.label = new_labs[i]
+        for b in t.branches:
+            reverse(b, 1-flag)
+    reverse(t, 1)
 
 
 class Link:
