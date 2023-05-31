@@ -150,7 +150,8 @@ def add_d_leaves(t, v):
           10
         10
     """
-
+    # use a helper function to keep track of depth,
+    # function parameters are used to keep track of the states
     def helper(t, d):
 
         #t.branches + [Tree(v)] * d

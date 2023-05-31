@@ -16,5 +16,10 @@
         (if (odd? (car s))
           (evenSub (cdr s))
           (oddSub (cdr s))))
-      (if (odd? (car s)) (list (list (car s)) nil)))))
+      (if 
+      (odd? (car s)) 
+      (list (list (car s)))
+      nil)))
+      )
+      
 

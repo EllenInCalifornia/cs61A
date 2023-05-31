@@ -1,0 +1,7 @@
+Format document
+:call CocAction('format')
+:CocCommand sql.Format
+Format selected content
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
