@@ -33,9 +33,14 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
     if scheme_symbolp(first) and first in scheme_forms.SPECIAL_FORMS:
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
-        # BEGIN PROBLEM 3
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM 3
+        '''scheme_eval(Pair('+', Pair(2, Pair(2, nil))), create_global_frame())
+         expr = read_line('(+ (+ 2 2) (+ 1 3) (* 1 4))') 
+        '''
+        # in map function, mapped = fn(self.first), but scheme_eval has two arguments
+        operator, operands = scheme_eval(expr.first, env), expr.rest.map(lambda x: scheme_eval(x, env))
+        return scheme_apply(operator, operands, env)
+
+
 
 
 def scheme_apply(procedure, args, env):
