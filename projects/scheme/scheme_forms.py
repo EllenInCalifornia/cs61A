@@ -37,8 +37,16 @@ def do_define_form(expressions, env):
         # assigning a name to a value e.g. (define x (+ 1 2))
         validate_form(expressions, 2, 2)  # Checks that expressions is a list of length exactly 2
         # expression: Pair(A, Pair(B, nil))
-        value = scheme_eval(expressions.rest, env)
-        env.define(signature, value)
+        # Pair(2, nil) is not an expression, cannot be evaluated
+
+        if scheme_symbolp(expressions.rest.first):
+            signature = env.lookup(expressions.rest.first)
+        elif self_evaluating(expressions.rest.first):
+            env.define(signature, expressions.rest.first)
+        else:
+            # why it is expression.rest.first not expression.rest?
+            value = scheme_eval(expressions.rest.first, env)
+            env.define(signature, value)
         return signature
     elif isinstance(signature, Pair) and scheme_symbolp(signature.first):
         # defining a named procedure e.g. (define (f x y) (+ x y))
@@ -48,7 +56,6 @@ def do_define_form(expressions, env):
     else:
         bad_signature = signature.first if isinstance(signature, Pair) else signature
         raise SchemeError('non-symbol: {0}'.format(bad_signature))
-
 
 def do_quote_form(expressions, env):
     """Evaluate a quote form.
