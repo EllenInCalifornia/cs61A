@@ -38,10 +38,11 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
          expr = read_line('(+ (+ 2 2) (+ 1 3) (* 1 4))') 
         '''
         # in map function, mapped = fn(self.first), but scheme_eval has two arguments
-        operator, operands = scheme_eval(expr.first, env), expr.rest.map(lambda x: scheme_eval(x, env))
-
+        operator = scheme_eval(expr.first, env)
+        # if isinstance(operator, LambdaProcedure):
+        #     return scheme_apply(operator, expr.rest, env)
+        operands = expr.rest.map(lambda x: scheme_eval(x, env))
         return scheme_apply(operator, operands, env)
-
 
 
 
@@ -68,22 +69,11 @@ def scheme_apply(procedure, args, env):
             raise SchemeError('incorrect number of arguments: {0}'.format(procedure))
     elif isinstance(procedure, LambdaProcedure):
         formals = procedure.formals
+        # vals = args.map(lambda x: scheme_eval(x, env))
         current_frame = env.make_child_frame(formals, args)
         return eval_all(procedure.body, current_frame)
 
         # body:  Pair(Pair("+", Pair("x", Pair(2, nil))), nil)
-
-
-        # (define outer-func (lambda (x y) (define inner (lambda (z x) (+ x (* y 2) (* z 3)))) inner))
-
-
-
-
-    # BEGIN PROBLEM 9 # LambdaProcedure(formals, body, env) # make_child_frame(self, formals, vals)
-
-
-        "*** YOUR CODE HERE ***"
-
 
         # END PROBLEM 9
 
@@ -93,6 +83,7 @@ def scheme_apply(procedure, args, env):
         # END PROBLEM 11
     else:
         assert False, "Unexpected procedure: {}".format(procedure)
+# (define outer-func (lambda (x y) (define inner (lambda (z x) (+ x (* y 2) (* z 3)))) inner))
 
 
 def eval_all(expressions, env):
@@ -112,9 +103,10 @@ def eval_all(expressions, env):
     """
     # BEGIN PROBLEM 6
     result = None
-    while expressions != nil:
-        result = scheme_eval(expressions.first, env)
-        expressions = expressions.rest
+    expr = expressions
+    while expr != nil:
+        result = scheme_eval(expr.first, env)
+        expr = expr.rest
     return result
 
 
