@@ -45,6 +45,7 @@ def do_define_form(expressions, env):
             env.define(signature, expressions.rest.first)
         else:
             # why it is expression.rest.first not expression.rest?
+            # because in (x (+ 2 3)), expression.rest is the outer pair
             value = scheme_eval(expressions.rest.first, env)
             env.define(signature, value)
         return signature
@@ -66,7 +67,7 @@ def do_quote_form(expressions, env):
     """
     validate_form(expressions, 1, 1)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    return expressions.first
     # END PROBLEM 5
 
 
@@ -93,9 +94,11 @@ def do_lambda_form(expressions, env):
     validate_form(expressions, 2)
     formals = expressions.first
     validate_formals(formals)
-    # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
-    # END PROBLEM 7
+    # expressions =  Pair(Pair("x", nil), Pair(Pair("+", Pair("x", Pair(2, nil))), nil))
+    # # # (lambda (x) (+ x 2))
+    body = expressions.rest
+    return LambdaProcedure(formals, body, env)
+
 
 
 def do_if_form(expressions, env):
