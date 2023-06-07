@@ -1,6 +1,7 @@
 import sys
 
 from pair import *
+from scheme import *
 from scheme_utils import *
 from ucb import main, trace
 
@@ -38,6 +39,7 @@ def scheme_eval(expr, env, _=None):  # Optional third argument is ignored
         '''
         # in map function, mapped = fn(self.first), but scheme_eval has two arguments
         operator, operands = scheme_eval(expr.first, env), expr.rest.map(lambda x: scheme_eval(x, env))
+
         return scheme_apply(operator, operands, env)
 
 
@@ -65,9 +67,26 @@ def scheme_apply(procedure, args, env):
         except TypeError as err:
             raise SchemeError('incorrect number of arguments: {0}'.format(procedure))
     elif isinstance(procedure, LambdaProcedure):
-        # BEGIN PROBLEM 9
+        formals = procedure.formals
+        current_frame = env.make_child_frame(formals, args)
+        return eval_all(procedure.body, current_frame)
+
+        # body:  Pair(Pair("+", Pair("x", Pair(2, nil))), nil)
+
+
+        # (define outer-func (lambda (x y) (define inner (lambda (z x) (+ x (* y 2) (* z 3)))) inner))
+
+
+
+
+    # BEGIN PROBLEM 9 # LambdaProcedure(formals, body, env) # make_child_frame(self, formals, vals)
+
+
         "*** YOUR CODE HERE ***"
+
+
         # END PROBLEM 9
+
     elif isinstance(procedure, MuProcedure):
         # BEGIN PROBLEM 11
         "*** YOUR CODE HERE ***"
@@ -92,7 +111,14 @@ def eval_all(expressions, env):
     2
     """
     # BEGIN PROBLEM 6
-    return scheme_eval(expressions.first, env)  # replace this with lines of your own code
+    result = None
+    while expressions != nil:
+        result = scheme_eval(expressions.first, env)
+        expressions = expressions.rest
+    return result
+
+
+      # replace this with lines of your own code
     # END PROBLEM 6
 
 
